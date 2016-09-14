@@ -28,4 +28,9 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function () {
 	 * home
 	 */
 	Route::get('/', ['as' => 'backend.home', 'uses' => 'HomeController@index']);
+
+	/**
+	 * user
+	 */
+	Route::get('/users', ['as' => 'backend.users', 'uses' => 'UserController@index']);	
 });
