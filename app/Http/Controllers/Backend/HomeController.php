@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\BackendController;
 
@@ -12,6 +12,6 @@ class HomeController extends BackendController
 
 	public function index()
 	{
-		echo 1;die;
+		return view('backend.home.index');
 	}
 }

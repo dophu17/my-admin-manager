@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/**
+ * admin
+ */
+Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend'], function () {
+	// Route::get('/', function () {
+	// 	return redirect()->route('backend.menus');
+	// });
+
+	/**
+	 * home
+	 */
+	Route::get('/', ['as' => 'backend.home', 'uses' => 'HomeController@index']);
+});
