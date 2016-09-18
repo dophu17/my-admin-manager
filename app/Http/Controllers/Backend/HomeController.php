@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BackendController;
 
+use Auth;
+
 class HomeController extends BackendController
 {
 	public function __construct()

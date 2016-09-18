@@ -18,6 +18,9 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('') }}public/backend/build/css/custom.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="{{ asset('') }}public/backend/vendors/jquery/dist/jquery.min.js"></script>
   </head>
 
   <body class="nav-md">
@@ -112,7 +115,7 @@
                       <li><a href="projects.html">Projects</a></li>
                       <li><a href="project_detail.html">Project Detail</a></li>
                       <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
+                      <li><a href="{{ route('backend.users.profile') }}">Profile</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
@@ -179,11 +182,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('') }}public/backend/images/img.jpg" alt="">John Doe
+                    <img src="{{ asset('') }}public/backend/images/img.jpg" alt="">{{ @Auth::user()->name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="{{ route('backend.users.profile') }}"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -191,7 +194,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -280,14 +283,21 @@
       </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="{{ asset('') }}public/backend/vendors/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap -->
     <script src="{{ asset('') }}public/backend/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="{{ asset('') }}public/backend/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="{{ asset('') }}public/backend/vendors/nprogress/nprogress.js"></script>
+    <!-- morris.js -->
+    <script src="{{ asset('') }}public/backend/vendors/raphael/raphael.min.js"></script>
+    <script src="{{ asset('') }}public/backend/vendors/morris.js/morris.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{ asset('') }}public/backend/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('') }}public/backend/js/moment/moment.min.js"></script>
+    <script src="{{ asset('') }}public/backend/js/datepicker/daterangepicker.js"></script>
     
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('') }}public/backend/build/js/custom.min.js"></script>

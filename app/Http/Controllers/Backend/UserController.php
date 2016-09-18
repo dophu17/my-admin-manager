@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\BackendController;
+use App\Http\Models\UserModel;
 
 use Hash;
 use DB;
@@ -23,4 +24,35 @@ class UserController extends BackendController
 
 		DB::table('users')->insert($data);
 	}
+
+
+	public function getProfile()
+	{
+		return view('backend.users.profile');
+	}
+
+
+	public function getEditProfile($id)
+	{
+		$clsUser = new UserModel();
+		$user = $clsUser->getByID($id);
+
+		if ( empty($user) ) {
+			return response()->view('errors.page_404', [], 404);
+		}
+
+		echo '<pre>';
+		print_r($user);
+		echo '</pre>';
+		die;
+	}
+
+
+	public function postEditProfile($id)
+	{
+		
+	}
+
+
+
 }
