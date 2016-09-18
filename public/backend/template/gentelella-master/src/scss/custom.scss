@@ -3417,7 +3417,7 @@ a.hiddenanchor {
   max-width: 350px;
   position: relative;
 }
-.registration_form, .login_form {
+.registration_form, .login_form, .forgot-password_form {
   position: absolute;
   top: 0px;
   width: 100%;
@@ -3430,7 +3430,15 @@ a.hiddenanchor {
 .login_form {
   z-index: 22;
 }
-#signup:target ~ .login_wrapper .registration_form, #signin:target ~ .login_wrapper .login_form {
+
+.forgot-password_form {
+  z-index: 20;
+  opacity: 0;
+  width: 100%; }
+  
+#signup:target ~ .login_wrapper .registration_form, 
+#signin:target ~ .login_wrapper .login_form,
+#signin:target ~ .login_wrapper .forgot-password_form {
   z-index: 22;
   -webkit-animation-name: fadeInLeft;
   -moz-animation-name: fadeInLeft;
@@ -3443,7 +3451,9 @@ a.hiddenanchor {
   -ms-animation-delay: .1s;
   animation-delay: .1s;
 }
-#signup:target ~ .login_wrapper .login_form, #signin:target ~ .login_wrapper .registration_form {
+#signup:target ~ .login_wrapper .login_form, 
+#signin:target ~ .login_wrapper .registration_form,
+#signin:target ~ .login_wrapper .forgot-password_form {
   -webkit-animation-name: fadeOutLeft;
   -moz-animation-name: fadeOutLeft;
   -ms-animation-name: fadeOutLeft;

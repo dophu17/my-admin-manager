@@ -17,7 +17,7 @@
     <link href="{{ asset('') }}public/backend/vendors/nprogress/nprogress.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{ asset('') }}public/backend/build/css/custom.min.css" rel="stylesheet">
+    <link href="{{ asset('') }}public/backend/build/css/custom.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="{{ asset('') }}public/backend/vendors/jquery/dist/jquery.min.js"></script>

@@ -42,6 +42,13 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend', 'middleware' => '
 /**
  * auth
  */
-Route::get('/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
-Route::post('/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin']);
-Route::get('/logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout']);
+// Route::get('/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
+// Route::post('/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin']);
+// Route::get('/logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout']);
+
+Route::get('/auth/login', ['as' => 'auth.login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::post('/auth/login', ['as' => 'auth.login', 'uses' => 'Auth\LoginController@login']);
+Route::get('/auth/logout', ['as' => 'auth.logout', 'uses' => 'Auth\LoginController@logout']);
+Route::post('/auth/register', ['as' => 'auth.register', 'uses' => 'Auth\RegisterController@postCreate']);
+Route::get('/auth/forgot-password', ['as' => 'auth.forgot.password', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
+Route::post('/auth/forgot-password', ['as' => 'auth.forgot.password', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);

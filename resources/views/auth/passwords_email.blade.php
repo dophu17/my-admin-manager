@@ -40,62 +40,20 @@
           @endif
 
           <section class="login_content">
-            {!! Form::open(['route' => 'auth.login', 'enctype'=>'multipart/form-data']) !!}
-              <h1>Login Form</h1>
+            {!! Form::open(['route' => 'auth.forgot.password', 'enctype'=>'multipart/form-data']) !!}
+              <h1>Forgot Password</h1>
               <div>
                 <input type="email" class="form-control" placeholder="Email" required="" name="email" value="{{ old('email') }}" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" name="password" value="" />
-              </div>
-              <div>
-                <input type="submit" name="login" class="btn btn-default submit" value="Log in" >
-                <a class="reset_pass" href="{{ route('auth.forgot.password') }}">Lost your password?</a>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <!-- register -->
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            {!! Form::open(['route' => 'auth.register', 'enctype'=>'multipart/form-data']) !!}
-              <h1>Create Account</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" name="name" value="{{ old('name') }}" />
-              </div>
-              <div>
-                <input type="email" class="form-control" placeholder="Email" required="" name="email" value="{{ old('email') }}" />
-              </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" name="password" />
-              </div>
-              <div>
-                <!-- <a class="btn btn-default submit" href="index.html">Submit</a> -->
-                <input type="submit" name="register" class="btn btn-default submit" value="Register">
+                <input type="submit" name="send" class="btn btn-default submit" value="Send" >
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
                 <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
+                  <a href="{{ route('auth.login') }}" class="to_register"> Log in </a>
                 </p>
 
                 <div class="clearfix"></div>

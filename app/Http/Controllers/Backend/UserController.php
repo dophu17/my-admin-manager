@@ -16,13 +16,7 @@ class UserController extends BackendController
 
 	public function index()
 	{
-		$data = array(
-			'name' 		=> 'dophu17',
-			'email' 	=> 'dophu17@gmail.com',
-			'password' 	=> Hash::make('123456')
-		);
-
-		DB::table('users')->insert($data);
+		echo 'list users';die;
 	}
 
 
