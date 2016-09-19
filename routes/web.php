@@ -52,3 +52,5 @@ Route::get('/auth/logout', ['as' => 'auth.logout', 'uses' => 'Auth\LoginControll
 Route::post('/auth/register', ['as' => 'auth.register', 'uses' => 'Auth\RegisterController@postCreate']);
 Route::get('/auth/forgot-password', ['as' => 'auth.forgot.password', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
 Route::post('/auth/forgot-password', ['as' => 'auth.forgot.password', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
+Route::get('/password/reset/{token}', ['as' => 'auth.forgot.password.broker', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+Route::post('/password/reset', ['as' => 'auth.forgot.password.reset', 'uses' => 'Auth\ResetPasswordController@reset']);
