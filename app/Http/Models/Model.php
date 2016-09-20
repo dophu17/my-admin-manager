@@ -7,6 +7,20 @@ class Model
 	protected $table = 'Table name';
 	protected $primary = 'Primary field name';
 
+	protected function rules()
+	{
+		return array(
+			//something
+		);
+	}
+
+	protected function messages()
+	{
+		return array(
+			//something
+		);
+	}
+
 
 	public function insert($data)
 	{

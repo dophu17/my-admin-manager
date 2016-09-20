@@ -2,9 +2,9 @@
 
 use App\Http\Models\Model;
 
-class UserModel extends Model
+class ProductModel extends Model
 {
-	protected $table = 'users';
+	protected $table = 'products';
 	protected $primary = 'id';
 
 

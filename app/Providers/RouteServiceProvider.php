@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         //
-        $this->mapAdminRoutes();
+        // $this->mapAdminRoutes();
     }
 
     /**
@@ -81,14 +81,14 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * my route
      */
-    protected function mapAdminRoutes()
-    {
-        Route::group([
-            // 'middleware' => 'auth',
-            'namespace' => $this->namespace . '\Backend',
-            'prefix' => 'sys-adm',
-        ], function ($router) {
-            require base_path('routes/admin.php');
-        });
-    }
+    // protected function mapAdminRoutes()
+    // {
+    //     Route::group([
+    //         // 'middleware' => 'auth',
+    //         'namespace' => $this->namespace . '\Backend',
+    //         'prefix' => 'sys-adm',
+    //     ], function ($router) {
+    //         require base_path('routes/admin.php');
+    //     });
+    // }
 }

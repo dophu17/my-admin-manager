@@ -2,9 +2,9 @@
 
 use App\Http\Models\Model;
 
-class UserModel extends Model
+class NewsModel extends Model
 {
-	protected $table = 'users';
+	protected $table = 'news';
 	protected $primary = 'id';
 
 

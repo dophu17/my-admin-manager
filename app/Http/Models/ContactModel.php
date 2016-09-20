@@ -2,9 +2,9 @@
 
 use App\Http\Models\Model;
 
-class UserModel extends Model
+class ContactModel extends Model
 {
-	protected $table = 'users';
+	protected $table = 'contacts';
 	protected $primary = 'id';
 
 

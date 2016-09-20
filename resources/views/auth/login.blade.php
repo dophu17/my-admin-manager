@@ -26,31 +26,22 @@
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
-      <a class="hiddenanchor" id="forgot-password"></a>
 
       <div class="login_wrapper">
-        <!-- login -->
         <div class="animate form login_form">
-          @if (Session::has('fail'))
-            <div class="alert alert-danger alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              {{ Session::get('fail') }}
-            </div>
-          @endif
-
           <section class="login_content">
-            {!! Form::open(['route' => 'auth.login', 'enctype'=>'multipart/form-data']) !!}
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+              {{ csrf_field() }}
               <h1>Login Form</h1>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" name="email" value="{{ old('email') }}" />
+                <input type="email" class="form-control" placeholder="Email" required="" value="{{ old('email') }}" name="email" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" name="password" value="" />
+                <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <input type="submit" name="login" class="btn btn-default submit" value="Log in" >
-                <a class="reset_pass" href="{{ route('auth.forgot.password') }}">Lost your password?</a>
+                <input type="submit" class="btn btn-default submit" name="login" value="Log in">
+                <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
               <div class="clearfix"></div>
@@ -72,23 +63,22 @@
           </section>
         </div>
 
-        <!-- register -->
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            {!! Form::open(['route' => 'auth.register', 'enctype'=>'multipart/form-data']) !!}
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+              {{ csrf_field() }}
               <h1>Create Account</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" name="name" value="{{ old('name') }}" />
+                <input id="name" type="text" class="form-control" name="name" placeholder="Username" value="{{ old('name') }}" required autofocus>
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" name="email" value="{{ old('email') }}" />
+                <input id="email" type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}" required>
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" name="password" />
+                <input id="password" type="password" class="form-control" placeholder="Password" name="password" required>
               </div>
               <div>
-                <!-- <a class="btn btn-default submit" href="index.html">Submit</a> -->
-                <input type="submit" name="register" class="btn btn-default submit" value="Register">
+                <input type="submit" class="btn btn-default submit" name="login" value="Register">
               </div>
 
               <div class="clearfix"></div>
@@ -109,7 +99,6 @@
             </form>
           </section>
         </div>
-
       </div>
     </div>
   </body>
