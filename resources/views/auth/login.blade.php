@@ -32,16 +32,17 @@
           <section class="login_content">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
               {{ csrf_field() }}
+
               <h1>Login Form</h1>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" value="{{ old('email') }}" name="email" />
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
               </div>
               <div>
-                <input type="submit" class="btn btn-default submit" name="login" value="Log in">
-                <a class="reset_pass" href="#">Lost your password?</a>
+                <input type="submit" name="login" value="Log in" class="btn btn-default submit">
+                <a class="reset_pass" href="{{ url('/password/reset') }}">Lost your password?</a>
               </div>
 
               <div class="clearfix"></div>
@@ -67,18 +68,19 @@
           <section class="login_content">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
               {{ csrf_field() }}
+
               <h1>Create Account</h1>
               <div>
-                <input id="name" type="text" class="form-control" name="name" placeholder="Username" value="{{ old('name') }}" required autofocus>
+                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name" required autofocus>
               </div>
               <div>
-                <input id="email" type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required>
               </div>
               <div>
-                <input id="password" type="password" class="form-control" placeholder="Password" name="password" required>
+                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
               </div>
               <div>
-                <input type="submit" class="btn btn-default submit" name="login" value="Register">
+                <input type="submit" name="register" value="Register" class="btn btn-default submit">
               </div>
 
               <div class="clearfix"></div>
