@@ -16,7 +16,12 @@ class UserController extends BackendController
 
 	public function index()
 	{
-		echo 'list users';die;
+		$clsUser = new UserModel();
+
+		$data['listUser'] = $clsUser->getAll();
+		$data['titleContent'] = 'User';
+
+		return view('backend.users.index');
 	}
 
 

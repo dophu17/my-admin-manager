@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2016 at 06:02 PM
+-- Generation Time: Sep 22, 2016 at 12:37 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -19,6 +19,65 @@ SET time_zone = "+00:00";
 --
 -- Database: `myadminmanager`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` text COLLATE utf8_unicode_ci,
+  `name_slug` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `icon` text COLLATE utf8_unicode_ci,
+  `tag` text COLLATE utf8_unicode_ci,
+  `orderby` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `last_user` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories_products`
+--
+
+CREATE TABLE `categories_products` (
+  `id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL,
+  `subject` text COLLATE utf8_unicode_ci,
+  `from_name` text COLLATE utf8_unicode_ci,
+  `from_email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT NULL COMMENT '0: not read; 1:read'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `news_id` int(11) DEFAULT NULL,
+  `name` text COLLATE utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -42,6 +101,24 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `name` text COLLATE utf8_unicode_ci,
+  `name_slug` text COLLATE utf8_unicode_ci,
+  `avatar` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci,
+  `content` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `last_user` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `password_resets`
 --
 
@@ -49,6 +126,49 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` text COLLATE utf8_unicode_ci,
+  `name_slug` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` text COLLATE utf8_unicode_ci,
+  `price` double DEFAULT NULL,
+  `price_promotion` double DEFAULT NULL,
+  `color` text COLLATE utf8_unicode_ci,
+  `weight` float DEFAULT NULL,
+  `height` float DEFAULT NULL,
+  `made_in` text COLLATE utf8_unicode_ci,
+  `version_year` int(4) DEFAULT NULL,
+  `model` text COLLATE utf8_unicode_ci,
+  `tag` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci,
+  `status` tinyint(1) DEFAULT NULL COMMENT '0: stock; 1: not stock',
+  `orderby` int(11) DEFAULT NULL,
+  `is_feature` int(11) DEFAULT NULL,
+  `is_new` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `last_user` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `key` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `value` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `default_value` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -63,20 +183,57 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` text COLLATE utf8_unicode_ci,
+  `address` text COLLATE utf8_unicode_ci,
+  `birthday` date DEFAULT NULL,
+  `phone` int(12) DEFAULT NULL,
+  `fax` int(12) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `last_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'dophu17', 'dophu17@gmail.com', '$2y$10$DNZL1ZltTGRHcygFRXSHuOWZry5cM4dUaECixtSxVaJY6zinXd/E6', NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `avatar`, `address`, `birthday`, `phone`, `fax`, `created_at`, `updated_at`, `last_user`) VALUES
+(1, 'dophu17', 'dophu17@gmail.com', '$2y$10$somMbRc6oyI7y4yfNRp09u98F0Eb4yTnDSzakHY2Kd8QxdkXQo35y', 'TWrEVOFHKfO6ONQCzi7YbwCbCBOXG6bvOoLbJlh9WdL3ThW3iOgGNU3dLuCG', NULL, NULL, NULL, NULL, NULL, NULL, '2016-09-21 02:23:19', NULL),
+(2, 'phu', 'phu.dht@chiroro.com.vn', '$2y$10$Y6ZOTnKdviqSrZguinm/.eEEjkbMq6GtdW0f/l70pe3Eou3jKJd3y', 'e90Uc2usV8sePgreCPzFhWnDRBM88xiIzwesE5O6HDVV43Lr83YMdGg6PhFm', NULL, NULL, NULL, NULL, NULL, '2016-09-19 05:35:11', '2016-09-19 05:35:18', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories_products`
+--
+ALTER TABLE `categories_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `password_resets`
@@ -84,6 +241,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`),
   ADD KEY `password_resets_token_index` (`token`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -97,10 +266,45 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `categories_products`
+--
+ALTER TABLE `categories_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
