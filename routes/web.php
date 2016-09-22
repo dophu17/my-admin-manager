@@ -29,6 +29,11 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend', 'middleware' => '
 	 * user
 	 */
 	Route::get('/users', ['as' => 'backend.users', 'uses' => 'UserController@index']);
+	Route::get('/users/add', ['as' => 'backend.users.add', 'uses' => 'UserController@getAdd']);
+	Route::post('/users/add', ['as' => 'backend.users.add', 'uses' => 'UserController@postAdd']);
+	Route::get('/users/edit/{id}', ['as' => 'backend.users.edit', 'uses' => 'UserController@getEdit']);
+	Route::post('/users/edit/{id}', ['as' => 'backend.users.edit', 'uses' => 'UserController@postEdit']);
+	Route::get('/users/delete/{id}', ['as' => 'backend.users.delete', 'uses' => 'UserController@getDelete']);
 
 	/**
 	 * profile
