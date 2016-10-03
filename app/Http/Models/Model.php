@@ -48,6 +48,6 @@ class Model
 
 	public function getAll($orderField = 'id', $orderValue = 'desc')
 	{
-		return DB::table($this->table)->orderBy($orderField, $orderValue)->paginate(1);	
+		return DB::table($this->table)->orderBy($orderField, $orderValue)->paginate(10);	
 	}
 }

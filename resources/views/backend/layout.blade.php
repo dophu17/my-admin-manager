@@ -15,12 +15,11 @@
     <link href="{{ asset('') }}public/backend/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="{{ asset('') }}public/backend/vendors/nprogress/nprogress.css" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="{{ asset('') }}public/backend/build/css/custom.css" rel="stylesheet">
+    <!-- My Style -->
+    <link href="{{ asset('') }}public/backend/css/mystyle.css" rel="stylesheet">
 
-    <!-- jQuery -->
-    <script src="{{ asset('') }}public/backend/vendors/jquery/dist/jquery.min.js"></script>
   </head>
 
   <body class="nav-md">
@@ -286,7 +285,8 @@
       </div>
     </div>
 
-
+    <!-- jQuery -->
+    <script src="{{ asset('') }}public/backend/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="{{ asset('') }}public/backend/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -301,8 +301,14 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{ asset('') }}public/backend/js/moment/moment.min.js"></script>
     <script src="{{ asset('') }}public/backend/js/datepicker/daterangepicker.js"></script>
+    <!-- jquery.inputmask -->
+    <script src="{{ asset('') }}public/backend/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('') }}public/backend/build/js/custom.min.js"></script>
+
+    @yield('script')
+
+
   </body>
 </html>
