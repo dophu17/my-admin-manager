@@ -45,6 +45,7 @@ class UserController extends BackendController
 	{
 		$clsUser 				= new UserModel();
 		$inputs 				= Input::all();
+		$avatar					= Input::file('avatar');
 
 		$rules 					= $clsUser->rules();
 		$messages 				= $clsUser->messages();
@@ -58,8 +59,8 @@ class UserController extends BackendController
 
         // image
         $imageName = NULL;
-        if ( !empty($datas['avatar']) ) {
-        	$imageName = time() . '-' . $inputs['avatar']->getClientOriginalName() . '.' . $inputs['avatar']->getClientOriginalExtension();
+        if ( $avatar ) {
+        	$imageName = time() . '-' . $avatar->getClientOriginalName() . '.' . $avatar->getClientOriginalExtension();
         }
         $datas['avatar'] = $imageName;
         $datas['created_at'] = date('Y-m-d H:i:s');
@@ -67,9 +68,9 @@ class UserController extends BackendController
 
         if ( $status ) {
         	// upload image
-        	if ( !empty($datas['avatar']) ) {
-	        	$inputs['avatar']->move(public_path() . '/uploads/users/', $imageName);
-	        }
+    		if ( $avatar ) {
+    			$avatar->move(public_path() . '/uploads/users/', $imageName);
+    		}
 
         	Session::flash('success', trans('common.message_add_success'));
         } else {
@@ -100,14 +101,17 @@ class UserController extends BackendController
 	{
 		$clsUser 				= new UserModel();
 		$inputs 				= Input::all();
+		$avatar					= Input::file('avatar');
 
 		$user 					= $clsUser->getByID($id);
 		$rules 					= $clsUser->rules();
 		if ( $inputs['email'] == $user->email ) {
 			unset($rules['email']);
 		}
+		if ( empty($inputs['password']) ) {
+        	unset($rules['password']);
+        }
 		$messages 				= $clsUser->messages();
-		$avatar					= Input::file('avatar');
 
 		$validator  = Validator::make($inputs, $rules, $messages);
         if ($validator->fails()) {
@@ -115,11 +119,19 @@ class UserController extends BackendController
         }
 
         $datas = $clsUser->setValue($inputs);
+        if ( empty($inputs['password']) ) {
+        	unset($datas['password']);
+        }
 
         // image
         $imageName = NULL;
-        if ( $avatar ) {
-        	$imageName = time() . '-' . $avatar->getClientOriginalName() . '.' . $avatar->getClientOriginalExtension();
+        if ( $inputs['keep_image'] == 0 ) {
+        	if ( $avatar ) {
+        		$imageName = time() . '-' . $avatar->getClientOriginalName();
+        	} else {
+        		$imageName = null;
+        	}
+        	
         } else {
         	$imageName = $user->avatar;
         }
@@ -129,12 +141,15 @@ class UserController extends BackendController
 
         if ( $status ) {
         	// upload image
-        	if ( $avatar ) {
-	        	$avatar->move(public_path() . '/uploads/users/', $imageName);
+        	if ( $inputs['keep_image'] == 0 ) {
 	        	// delete old image
-	        	if ( File::exists(public_path() . '/uploads/users/', $user->avatar) ) {
-	        		File::delete(public_path() . '/uploads/users/', $user->avatar);
+	        	if ( File::exists(public_path() . '/uploads/users/' . $user->avatar) ) {
+	        		File::delete(public_path() . '/uploads/users/' . $user->avatar);
 	        	}
+	        	// update new image
+        		if ( $avatar ) {
+        			$avatar->move(public_path() . '/uploads/users/',  $imageName);	
+        		}
 	        }
 
         	Session::flash('success', trans('common.message_add_success'));
@@ -146,7 +161,7 @@ class UserController extends BackendController
 	}
 
 
-	public function getProfile()
+	public function getProfile($id)
 	{
 		$clsUser 		= new UserModel();
 		$data['user'] 	= $clsUser->getByID($id);

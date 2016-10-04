@@ -3,3 +3,8 @@
 	margin-top: 5px;
 	color: #CE5454;
 }
+
+.img-content img {
+	max-width: 100%;
+	width: auto;
+}

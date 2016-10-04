@@ -38,7 +38,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend', 'middleware' => '
 	/**
 	 * profile
 	 */
-	Route::get('/profile', ['as' => 'backend.users.profile', 'uses' => 'UserController@getProfile']);
+	Route::get('/profile/{id}', ['as' => 'backend.users.profile', 'uses' => 'UserController@getProfile']);
 	Route::post('/profile/edit/{id}', ['as' => 'backend.users.profile.edit', 'uses' => 'UserController@postEditProfile']);
 
 	/**

@@ -141,10 +141,26 @@
                       <div class="form-group {{ $str }}">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Avatar </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div>
-                            <img src="{{ public_path() }}uploads/users/{{ $user->avatar }}" alt="" >
+                          <div class="img-content">
+                            <div class="radio">
+                              <label>
+                                <input type="radio" class="" checked name="keep_image" value="1"> Keep old image
+                              </label>
+                            </div>
+                            <!-- end radio -->
+                            @if ( !empty($user->avatar) )
+                            <img src="{{ asset('') }}public/uploads/users/{{ $user->avatar }}" alt="" >
+                            @endif
                           </div>
-                          <input id="avatar" class="date-picker form-control col-md-7 col-xs-12" type="file" name="avatar" value="{{ old('avatar') }}">
+                          <div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" class="" name="keep_image" value="0"> Update new image
+                              </label>
+                            </div>
+                            <!-- end radio -->
+                            <input id="avatar" class="date-picker form-control col-md-7 col-xs-12" type="file" name="avatar" value="{{ old('avatar') }}">
+                          </div>
                           @if ($errors->first('avatar'))
                           <span class="error-input">{!! $errors->first('avatar') !!}</span>
                           @endif

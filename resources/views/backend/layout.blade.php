@@ -114,7 +114,7 @@
                       <li><a href="projects.html">Projects</a></li>
                       <li><a href="project_detail.html">Project Detail</a></li>
                       <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="{{ route('backend.users.profile') }}">Profile</a></li>
+                      <li><a href="{{ route('backend.users.profile', [ Auth::user()->id ]) }}">Profile</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
@@ -185,7 +185,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="{{ route('backend.users.profile') }}"> Profile</a></li>
+                    <li><a href="{{ route('backend.users.profile', [ Auth::user()->id ]) }}"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
