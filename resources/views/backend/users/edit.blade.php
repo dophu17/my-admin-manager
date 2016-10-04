@@ -142,7 +142,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Avatar </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div>
-                            image
+                            <img src="{{ public_path() }}uploads/users/{{ $user->avatar }}" alt="" >
                           </div>
                           <input id="avatar" class="date-picker form-control col-md-7 col-xs-12" type="file" name="avatar" value="{{ old('avatar') }}">
                           @if ($errors->first('avatar'))

@@ -70,7 +70,7 @@
                         </li>
                       </ul>
 
-                      <a class="btn btn-success" href="{{ route('backend.users.profile.edit', [ Auth::user()->id ]) }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                      <a class="btn btn-success" href="{{ route('backend.users.edit', [ Auth::user()->id ]) }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                       <br />
 
                       <!-- start skills -->

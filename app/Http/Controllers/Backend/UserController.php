@@ -88,6 +88,10 @@ class UserController extends BackendController
 		$data['titleContent'] 	= 'Edit user';
 		$data['user'] 			= $clsUser->getByID($id);
 
+		if ( empty($data['user']) ) {
+			return response()->view('errors.page_404', [], 404);
+		}
+
 		return view('backend.users.edit', $data);
 	}
 
@@ -103,7 +107,7 @@ class UserController extends BackendController
 			unset($rules['email']);
 		}
 		$messages 				= $clsUser->messages();
-		$avatar					= @$inputs['avatar'];
+		$avatar					= Input::file('avatar');
 
 		$validator  = Validator::make($inputs, $rules, $messages);
         if ($validator->fails()) {
@@ -124,7 +128,6 @@ class UserController extends BackendController
         $status = $clsUser->update($id, $datas);
 
         if ( $status ) {
-        	
         	// upload image
         	if ( $avatar ) {
 	        	$avatar->move(public_path() . '/uploads/users/', $imageName);
@@ -145,29 +148,64 @@ class UserController extends BackendController
 
 	public function getProfile()
 	{
-		return view('backend.users.profile');
-	}
+		$clsUser 		= new UserModel();
+		$data['user'] 	= $clsUser->getByID($id);
 
-
-	public function getEditProfile($id)
-	{
-		$clsUser = new UserModel();
-		$user = $clsUser->getByID($id);
-
-		if ( empty($user) ) {
+		if ( empty($data['user']) ) {
 			return response()->view('errors.page_404', [], 404);
 		}
 
-		echo '<pre>';
-		print_r($user);
-		echo '</pre>';
-		die;
+		return view('backend.users.profile', $data);
 	}
 
 
 	public function postEditProfile($id)
 	{
-		
+		$clsUser 				= new UserModel();
+		$inputs 				= Input::all();
+
+		$user 					= $clsUser->getByID($id);
+		$rules 					= $clsUser->rules();
+		if ( $inputs['email'] == $user->email ) {
+			unset($rules['email']);
+		}
+		$messages 				= $clsUser->messages();
+		$avatar					= Input::file('avatar');
+
+		$validator  = Validator::make($inputs, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->route('backend.users.edit', [ $id ])->withErrors($validator)->withInput();
+        }
+
+        $datas = $clsUser->setValue($inputs);
+
+        // image
+        $imageName = NULL;
+        if ( $avatar ) {
+        	$imageName = time() . '-' . $avatar->getClientOriginalName() . '.' . $avatar->getClientOriginalExtension();
+        } else {
+        	$imageName = $user->avatar;
+        }
+        $datas['avatar'] = $imageName;
+        $datas['updated_at'] = date('Y-m-d H:i:s');
+        $status = $clsUser->update($id, $datas);
+
+        if ( $status ) {
+        	// upload image
+        	if ( $avatar ) {
+	        	$avatar->move(public_path() . '/uploads/users/', $imageName);
+	        	// delete old image
+	        	if ( File::exists(public_path() . '/uploads/users/', $user->avatar) ) {
+	        		File::delete(public_path() . '/uploads/users/', $user->avatar);
+	        	}
+	        }
+
+        	Session::flash('success', trans('common.message_add_success'));
+        } else {
+        	Session::flash('faild', trans('common.message_add_faild'));
+        }
+
+		return redirect()->route('backend.users.profile');
 	}
 
 
