@@ -36,7 +36,11 @@
             <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img src="{{ asset('') }}public/backend/images/img.jpg" alt="..." class="img-circle profile_img">
+                @if ( !empty(Auth::user()->avatar) && File::exists(public_path() . '/uploads/users/' . Auth::user()->avatar) )
+                <img class="img-circle profile_img" src="{{ asset('') }}public/uploads/users/{{ Auth::user()->avatar }}" alt="...">
+                @else
+                <img class="img-circle profile_img" src="{{ asset('') }}public/img/no-image.png" alt="Avatar" title="Change the avatar">
+                @endif
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -181,7 +185,12 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('') }}public/backend/images/img.jpg" alt="">{{ @Auth::user()->name }}
+                    @if ( !empty(Auth::user()->avatar) && File::exists(public_path() . '/uploads/users/' . Auth::user()->avatar) )
+                    <img class="img-responsive avatar-view" src="{{ asset('') }}public/uploads/users/{{ Auth::user()->avatar }}" alt="Avatar" title="Change the avatar" style="display: inline-block;">
+                    @else
+                    <img class="img-responsive avatar-view" src="{{ asset('') }}public/img/no-image.png" alt="Avatar" title="Change the avatar" width="29px">
+                    @endif
+                    {{ @Auth::user()->name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -208,7 +217,9 @@
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="{{ asset('') }}public/backend/images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image">
+                          <img src="{{ asset('') }}public/backend/images/img.jpg" alt="Profile Image" />
+                        </span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>

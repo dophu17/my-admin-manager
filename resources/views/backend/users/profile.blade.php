@@ -51,22 +51,26 @@
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="{{ asset('') }}public/backend/images/picture.jpg" alt="Avatar" title="Change the avatar">
+                          @if ( !empty(Auth::user()->avatar) && File::exists(public_path() . '/uploads/users/' . Auth::user()->avatar) )
+                          <img class="img-responsive avatar-view" src="{{ asset('') }}public/uploads/users/{{ Auth::user()->avatar }}" alt="Avatar" title="Change the avatar">
+                          @else
+                          <img class="img-responsive avatar-view" src="{{ asset('') }}public/img/no-image.png" alt="Avatar" title="Change the avatar">
+                          @endif
                         </div>
                       </div>
-                      <h3>Samuel Doe</h3>
+                      <!-- name -->
+                      <h3>{{ Auth::user()->name }}</h3>
 
                       <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
+                        <li><i class="fa fa-map-marker user-profile-icon"></i> {{ Auth::user()->address }}
                         </li>
 
                         <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i> Software Engineer
+                          <i class="fa fa-briefcase user-profile-icon"></i> {{ Auth::user()->phone }}
                         </li>
 
                         <li class="m-top-xs">
-                          <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="http://www.kimlabs.com/profile/" target="_blank">www.kimlabs.com</a>
+                          <i class="fa fa-external-link user-profile-icon"></i> {{ date('d-m-Y', strtotime(Auth::user()->birthday)) }}
                         </li>
                       </ul>
 
