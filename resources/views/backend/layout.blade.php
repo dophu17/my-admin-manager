@@ -179,16 +179,16 @@
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                <a id="menu_toggle"><i class="fa fa-ba"></i></a>
               </div>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     @if ( !empty(Auth::user()->avatar) && File::exists(public_path() . '/uploads/users/' . Auth::user()->avatar) )
-                    <img class="img-responsive avatar-view" src="{{ asset('') }}public/uploads/users/{{ Auth::user()->avatar }}" alt="Avatar" title="Change the avatar" style="display: inline-block;">
+                    <img class="" src="{{ asset('') }}public/uploads/users/{{ Auth::user()->avatar }}" alt="Avatar" title="Change the avatar" style="display: inline-block;">
                     @else
-                    <img class="img-responsive avatar-view" src="{{ asset('') }}public/img/no-image.png" alt="Avatar" title="Change the avatar" width="29px">
+                    <img class="" src="{{ asset('') }}public/img/no-image.png" alt="Avatar" title="Change the avatar" width="29px">
                     @endif
                     {{ @Auth::user()->name }}
                     <span class=" fa fa-angle-down"></span>

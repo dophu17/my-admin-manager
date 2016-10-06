@@ -152,9 +152,25 @@ class UserController extends BackendController
         		}
 	        }
 
-        	Session::flash('success', trans('common.message_add_success'));
+        	Session::flash('success', trans('common.message_update_success'));
         } else {
-        	Session::flash('faild', trans('common.message_add_faild'));
+        	Session::flash('faild', trans('common.message_update_faild'));
+        }
+
+		return redirect()->route('backend.users');
+	}
+
+
+	public function getDelete($id)
+	{
+		$clsUser 		= new UserModel();
+
+		$status 		= $clsUser->delete($id);
+
+        if ( $status ) {
+        	Session::flash('success', trans('common.message_delete_success'));
+        } else {
+        	Session::flash('faild', trans('common.message_delete_faild'));
         }
 
 		return redirect()->route('backend.users');

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2016 at 12:37 PM
+-- Generation Time: Oct 06, 2016 at 05:20 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -183,6 +183,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sex` tinyint(4) DEFAULT NULL COMMENT '1:men; 0: women',
   `avatar` text COLLATE utf8_unicode_ci,
   `address` text COLLATE utf8_unicode_ci,
   `birthday` date DEFAULT NULL,
@@ -197,9 +198,16 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `avatar`, `address`, `birthday`, `phone`, `fax`, `created_at`, `updated_at`, `last_user`) VALUES
-(1, 'dophu17', 'dophu17@gmail.com', '$2y$10$somMbRc6oyI7y4yfNRp09u98F0Eb4yTnDSzakHY2Kd8QxdkXQo35y', 'TWrEVOFHKfO6ONQCzi7YbwCbCBOXG6bvOoLbJlh9WdL3ThW3iOgGNU3dLuCG', NULL, NULL, NULL, NULL, NULL, NULL, '2016-09-21 02:23:19', NULL),
-(2, 'phu', 'phu.dht@chiroro.com.vn', '$2y$10$Y6ZOTnKdviqSrZguinm/.eEEjkbMq6GtdW0f/l70pe3Eou3jKJd3y', 'e90Uc2usV8sePgreCPzFhWnDRBM88xiIzwesE5O6HDVV43Lr83YMdGg6PhFm', NULL, NULL, NULL, NULL, NULL, '2016-09-19 05:35:11', '2016-09-19 05:35:18', NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `sex`, `avatar`, `address`, `birthday`, `phone`, `fax`, `created_at`, `updated_at`, `last_user`) VALUES
+(1, 'dophu17', 'dophu17@gmail.com', '$2y$10$somMbRc6oyI7y4yfNRp09u98F0Eb4yTnDSzakHY2Kd8QxdkXQo35y', 'TWrEVOFHKfO6ONQCzi7YbwCbCBOXG6bvOoLbJlh9WdL3ThW3iOgGNU3dLuCG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-09-21 02:23:19', NULL),
+(2, 'phu', 'phu.dht@chiroro.com.vn', '$2y$10$Y6ZOTnKdviqSrZguinm/.eEEjkbMq6GtdW0f/l70pe3Eou3jKJd3y', 'e90Uc2usV8sePgreCPzFhWnDRBM88xiIzwesE5O6HDVV43Lr83YMdGg6PhFm', NULL, NULL, NULL, NULL, NULL, NULL, '2016-09-19 05:35:11', '2016-09-19 05:35:18', NULL),
+(4, 'phu', 'dophu177@gmail.com', '$2y$10$7PRV/26G.URAWegbRz1D6OOp4ZoZaU3N8RIAmdVLiW5LGicg4GYYq', NULL, 1, NULL, '165 Thoai Ngoc Hau', '1994-07-01', 1696452584, 22222, '2016-10-02 06:25:53', NULL, 1),
+(5, 'phu 2', 'dophu1771@gmail.com', '$2y$10$ej4OazRFd6/8fUCEoJmW6OxLFo2cAZwcRPm7/fCvARV4jDeX2h6OO', NULL, 1, NULL, '165 Thoai Ngoc Hau', '1993-07-01', 1696452584, 22222, '2016-10-02 06:44:39', NULL, 1),
+(6, 'phu 3', 'dophu17717@gmail.com', '$2y$10$KP17Qr3aNTHA1M7V2J9JMeLZZ6Usc7V40lUpEduGjL6TKAA7Zsmpa', NULL, 1, NULL, '165 Thoai Ngoc Hau', '1993-07-01', 1696452584, 22222, '2016-10-02 06:45:21', NULL, 1),
+(7, 'phu', 'dophu1718@gmail.com', '123456', NULL, 1, NULL, '165 Thoai Ngoc Hau', '1993-07-01', 1696452584, 22222, '2016-10-02 07:00:29', NULL, 1),
+(8, 'phu', 'dophu17188@gmail.com', '123456', NULL, NULL, NULL, '165 Thoai Ngoc Hau', '1993-07-01', 1696452584, 22222, '2016-10-02 07:02:57', NULL, 1),
+(9, 'do phu 22222', 'dophu0000@gmail.com', '$2y$10$ky03WYqqDAK1Tepwntu9muK/v3LojM5BmgggRbBU7wX2DEFD4hXC6', NULL, NULL, NULL, NULL, '1970-01-01', NULL, NULL, '2016-10-02 07:13:25', NULL, 1),
+(10, 'phu upload 33334', 'dophu176666@gmail.com', '$2y$10$u9vSWzoif7AN/swDp/q6X.hJQssGFkdOs15sEHVbzLCnwIuK9nzTi', NULL, NULL, '1475591423-hinh-nen-dien-thoai-dep-nhat-7.jpg', '165 Thoai Ngoc Hau', '1970-01-01', NULL, NULL, '2016-10-02 08:03:20', '2016-10-04 14:39:15', 1);
 
 --
 -- Indexes for dumped tables
@@ -304,7 +312,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
