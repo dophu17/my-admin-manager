@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2016 at 05:20 PM
+-- Generation Time: Oct 07, 2016 at 01:02 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -38,6 +38,15 @@ CREATE TABLE `categories` (
   `last_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `name_slug`, `icon`, `tag`, `orderby`, `created_at`, `updated_at`, `last_user`) VALUES
+(1, 'Đậu hữ thơm', 'dau-hu-thom', NULL, 'dauhuthom', NULL, '2016-10-07 14:26:09', NULL, 1),
+(2, 'Category 111', 'category-111', '1475825191-before.png.png', 'category1', NULL, '2016-10-07 14:26:31', '2016-10-07 14:37:26', 1),
+(3, 'Category 2', 'category-2', NULL, 'category2', 1, '2016-10-07 14:28:36', '2016-10-07 14:38:07', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +74,14 @@ CREATE TABLE `contacts` (
   `created_at` datetime DEFAULT NULL,
   `is_read` tinyint(1) DEFAULT NULL COMMENT '0: not read; 1:read'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `subject`, `from_name`, `from_email`, `content`, `created_at`, `is_read`) VALUES
+(1, 'tets', 'phu', 'dophu17@gmail.com', 'test content', '2016-10-07 05:09:00', 0),
+(2, 'tets 2', 'phu 2', 'dophu17@gmail.com', 'test content 2', '2016-10-07 11:10:00', 1);
 
 -- --------------------------------------------------------
 
@@ -168,8 +185,18 @@ CREATE TABLE `settings` (
   `id` int(11) NOT NULL,
   `key` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `value` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `default_value` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
+  `default_value` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `label` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `key`, `value`, `default_value`, `label`, `description`) VALUES
+(1, '1', '11', '10', 'Pagination admin', 'Pagination in page admin only'),
+(2, '2', '6', '5', 'Pagination public', 'Pagination in page public only');
 
 -- --------------------------------------------------------
 
@@ -199,7 +226,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `sex`, `avatar`, `address`, `birthday`, `phone`, `fax`, `created_at`, `updated_at`, `last_user`) VALUES
-(1, 'dophu17', 'dophu17@gmail.com', '$2y$10$somMbRc6oyI7y4yfNRp09u98F0Eb4yTnDSzakHY2Kd8QxdkXQo35y', 'TWrEVOFHKfO6ONQCzi7YbwCbCBOXG6bvOoLbJlh9WdL3ThW3iOgGNU3dLuCG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-09-21 02:23:19', NULL),
+(1, 'dophu17', 'dophu17@gmail.com', '$2y$10$somMbRc6oyI7y4yfNRp09u98F0Eb4yTnDSzakHY2Kd8QxdkXQo35y', 'TWrEVOFHKfO6ONQCzi7YbwCbCBOXG6bvOoLbJlh9WdL3ThW3iOgGNU3dLuCG', NULL, '1475809344-Untitled6.png', NULL, '1970-01-01', NULL, NULL, NULL, '2016-10-07 03:02:24', 1),
 (2, 'phu', 'phu.dht@chiroro.com.vn', '$2y$10$Y6ZOTnKdviqSrZguinm/.eEEjkbMq6GtdW0f/l70pe3Eou3jKJd3y', 'e90Uc2usV8sePgreCPzFhWnDRBM88xiIzwesE5O6HDVV43Lr83YMdGg6PhFm', NULL, NULL, NULL, NULL, NULL, NULL, '2016-09-19 05:35:11', '2016-09-19 05:35:18', NULL),
 (4, 'phu', 'dophu177@gmail.com', '$2y$10$7PRV/26G.URAWegbRz1D6OOp4ZoZaU3N8RIAmdVLiW5LGicg4GYYq', NULL, 1, NULL, '165 Thoai Ngoc Hau', '1994-07-01', 1696452584, 22222, '2016-10-02 06:25:53', NULL, 1),
 (5, 'phu 2', 'dophu1771@gmail.com', '$2y$10$ej4OazRFd6/8fUCEoJmW6OxLFo2cAZwcRPm7/fCvARV4jDeX2h6OO', NULL, 1, NULL, '165 Thoai Ngoc Hau', '1993-07-01', 1696452584, 22222, '2016-10-02 06:44:39', NULL, 1),
@@ -277,7 +304,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `categories_products`
 --
@@ -287,7 +314,7 @@ ALTER TABLE `categories_products`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `images`
 --
@@ -307,7 +334,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
