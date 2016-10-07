@@ -44,7 +44,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend', 'middleware' => '
 	/**
 	 * category
 	 */
-	Route::get('/categories', ['as' => 'backend.categories.index', 'uses' => 'CategoryController@index']);
+	Route::get('/categories', ['as' => 'backend.categories', 'uses' => 'CategoryController@index']);
 	Route::get('/categories/add', ['as' => 'backend.categories.add', 'uses' => 'CategoryController@getAdd']);
 	Route::post('/categories/add', ['as' => 'backend.categories.add', 'uses' => 'CategoryController@postAdd']);
 	Route::get('/categories/edit/{id}', ['as' => 'backend.categories.edit', 'uses' => 'CategoryController@getEdit']);
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend', 'middleware' => '
 	/**
 	 * product
 	 */
-	Route::get('/products', ['as' => 'backend.products.index', 'uses' => 'ProductController@index']);
+	Route::get('/products', ['as' => 'backend.products', 'uses' => 'ProductController@index']);
 	Route::get('/products/add', ['as' => 'backend.products.add', 'uses' => 'ProductController@getAdd']);
 	Route::post('/products/add', ['as' => 'backend.products.add', 'uses' => 'ProductController@postAdd']);
 	Route::get('/products/edit/{id}', ['as' => 'backend.products.edit', 'uses' => 'ProductController@getEdit']);
@@ -64,13 +64,14 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend', 'middleware' => '
 	/**
 	 * contact
 	 */
-	Route::get('/contacts', ['as' => 'backend.contacts.index', 'uses' => 'ContactController@index']);
+	Route::get('/contacts', ['as' => 'backend.contacts', 'uses' => 'ContactController@index']);
 	Route::get('/contacts/detail/{id}', ['as' => 'backend.contacts.detail', 'uses' => 'ContactController@getDetail']);
+	Route::get('/contacts/delete/{id}', ['as' => 'backend.contacts.delete', 'uses' => 'ContactController@getDelete']);
 
 	/**
 	 * news
 	 */
-	Route::get('/news', ['as' => 'backend.news.index', 'uses' => 'NewsController@index']);
+	Route::get('/news', ['as' => 'backend.news', 'uses' => 'NewsController@index']);
 	Route::get('/news/add', ['as' => 'backend.news.add', 'uses' => 'NewsController@getAdd']);
 	Route::post('/news/add', ['as' => 'backend.news.add', 'uses' => 'NewsController@postAdd']);
 	Route::get('/news/edit/{id}', ['as' => 'backend.news.edit', 'uses' => 'NewsController@getEdit']);
@@ -80,8 +81,8 @@ Route::group(['prefix' => 'sys-adm', 'namespace' => 'Backend', 'middleware' => '
 	/**
 	 * setting
 	 */
-	Route::get('/settings', ['as' => 'backend.settings.index', 'uses' => 'SettingController@index']);
-	Route::post('/settings', ['as' => 'backend.settings.index', 'uses' => 'SettingController@postIndex']);
+	Route::get('/settings', ['as' => 'backend.settings', 'uses' => 'SettingController@index']);
+	Route::post('/settings', ['as' => 'backend.settings', 'uses' => 'SettingController@postIndex']);
 });
 
 

@@ -179,7 +179,7 @@
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-ba"></i></a>
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
 
               <ul class="nav navbar-nav navbar-right">
@@ -317,6 +317,7 @@
     
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('') }}public/backend/build/js/custom.min.js"></script>
+    <script src="{{ asset('') }}public/backend/js/myjs.js"></script>
 
     @yield('script')
 
