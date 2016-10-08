@@ -38,9 +38,25 @@ class SettingController extends BackendController
 
 		$inputs 					= Input::all();
 
-		foreach ( $inputs as $key => $value ) {
-			$data['value'] = $value;
-			$clsSetting->update($key, $data);
+		foreach ( $inputs as $k => $v ) {
+			if ( $k != 0 ) {
+				$str = explode('|', $k);
+				$id = $str[0];
+				$key = $str[1];
+				$data['value'] = $v;
+
+				// upload logo
+				if ( $key == 'LOGO' ) {
+					$logo = Input::file($k);
+					$imageName = time() . '-' . $logo->getClientOriginalName();
+					$logo->move(public_path() . '/uploads/settings/', $imageName);
+
+					$data['value'] = $imageName;
+				}
+				
+				$clsSetting->update($id, $data);
+			}
+			
 		}
 
 		return redirect()->route('backend.settings');

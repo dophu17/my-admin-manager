@@ -60,7 +60,7 @@ class UserController extends BackendController
         // image
         $imageName = NULL;
         if ( $avatar ) {
-        	$imageName = time() . '-' . $avatar->getClientOriginalName() . '.' . $avatar->getClientOriginalExtension();
+        	$imageName = time() . '-' . $avatar->getClientOriginalName();
         }
         $datas['avatar'] = $imageName;
         $datas['created_at'] = date('Y-m-d H:i:s');

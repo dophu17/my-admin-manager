@@ -52,15 +52,32 @@
                     <br>
                     {!! Form::open(array('route' => ['backend.settings'], 'enctype'=>'multipart/form-data', 'id' => 'demo-form2', 'data-parsley-validate' => '', 'class' => 'form-horizontal form-label-left', 'novalidate ' => '')) !!}
                       @foreach ( $lists as $item )
-                      <!-- name -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ $item->label }} <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="{{ $item->key }}" class="form-control col-md-7 col-xs-12" name="{{ $item->id }}" value="{{ $item->value }}" placeholder="{{ $item->default_value }}">
-                          <span class="" style="display: inline-block;">{{ $item->description }}</span>
+                        <!-- name -->
+                        @if ( $item->key != 'LOGO' )
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ $item->label }} <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="{{ $item->key }}" class="form-control col-md-7 col-xs-12" name="{{ $item->id .'|' . $item->key }}" value="{{ $item->value }}" placeholder="{{ $item->default_value }}">
+                            <span class="" style="display: inline-block;">{{ $item->description }}</span>
+                          </div>
                         </div>
-                      </div>
+                        <!-- logo -->
+                        @else
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ $item->label }} <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div style="margin-bottom: 5px;">
+                              @if ( !empty($item->value) )
+                              <img src="{{ asset('') }}public/uploads/settings/{{ $item->value }}" alt="" >
+                              @endif
+                            </div>
+                            <input type="file" id="{{ $item->key }}" class="form-control col-md-7 col-xs-12" name="{{ $item->id .'|' . $item->key }}">
+                            <span class="" style="display: inline-block;">{{ $item->description }}</span>
+                          </div>
+                        </div>
+                        @endif
                       @endforeach
 
                       <div class="ln_solid"></div>

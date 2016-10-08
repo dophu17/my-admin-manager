@@ -7,12 +7,23 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Http\Models\SettingModel;
+use Config;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct()
 	{
-		// something
+		$clsSetting 				= new SettingModel();
+
+		$settings 					= $clsSetting->getAll();
+        foreach ( $settings as $item ) {
+            define($item->key, $item->value);
+        }
+
+
+		// $configs = Config::get('constants.DEFINE');
 	}
 }
