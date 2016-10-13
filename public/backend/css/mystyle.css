@@ -8,3 +8,17 @@
 	max-width: 100%;
 	width: auto;
 }
+
+.both-left {
+	width: 49%;
+	margin-right: 1%;
+}
+
+.both-right {
+	width: 49%;
+	margin-left: 1%;
+}
+
+.textarea {
+	resize: vertical;
+}

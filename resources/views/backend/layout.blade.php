@@ -196,7 +196,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="{{ route('backend.users.profile', [ Auth::user()->id ]) }}"> Profile</a></li>
                     <li>
-                      <a href="javascript:;">
+                      <a href="{{ route('backend.settings') }}">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
@@ -314,6 +314,8 @@
     <script src="{{ asset('') }}public/backend/js/datepicker/daterangepicker.js"></script>
     <!-- jquery.inputmask -->
     <script src="{{ asset('') }}public/backend/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="{{ asset('') }}public/backend/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
     
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('') }}public/backend/build/js/custom.min.js"></script>
