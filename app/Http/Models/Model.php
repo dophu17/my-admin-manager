@@ -28,6 +28,12 @@ class Model
 	}
 
 
+	public function insertGetID($data)
+	{
+		return DB::table($this->table)->insertGetId($data);
+	}
+
+
 	public function update($id, $data)
 	{
 		return DB::table($this->table)->where($this->primary, $id)->update($data);

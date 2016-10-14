@@ -83,10 +83,14 @@
                           @foreach ( $lists as $item )
                           <tr>
                             <td>
-                              <img src="{{ asset('') }}public/uploads/products/{{ $item->avatar }}" alt="">
+                              @if ( empty($item->avatar) )
+                              <img src="{{ asset('') }}public/img/no-image.png" alt="" style="max-width: 100%;">
+                              @else
+                              <img src="{{ asset('') }}public/uploads/products/{{ $item->avatar }}" alt="" style="max-width: 100%;">
+                              @endif
                             </td>
                             <td>{{ $item->name }}</td>
-                            <td>
+                            <td align="center">
                               @if ( $item->status == 1 )
                               Stock
                               @else

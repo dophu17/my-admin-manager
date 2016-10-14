@@ -29,7 +29,7 @@
                   <div class="x_title">
                     <!-- <h2> -->
                       <!-- button back -->
-                      <div style="display: inline-block;"><a href="{{ route('backend.users') }}" class="btn btn-default">Back</a></div>
+                      <div style="display: inline-block;"><a href="{{ route('backend.products') }}" class="btn btn-default">Back</a></div>
                     <!-- </h2> -->
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -50,89 +50,128 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    {!! Form::open(array('route' => ['backend.users.edit', $user->id], 'enctype'=>'multipart/form-data', 'id' => 'demo-form2', 'data-parsley-validate' => '', 'class' => 'form-horizontal form-label-left', 'novalidate ' => '')) !!}
+                    {!! Form::open(array('route' => ['backend.products.edit', $product->id], 'enctype'=>'multipart/form-data', 'id' => 'demo-form2', 'data-parsley-validate' => '', 'class' => 'form-horizontal form-label-left', 'novalidate ' => '')) !!}
                       <!-- name -->
                       <?php $str = ($errors->first('name')) ? 'bad' : null; ?>
                       <div class="form-group {{ $str }}">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" class="form-control col-md-7 col-xs-12" name="name" value="{{ $user->name or old('name') }}" placeholder="Name">
+                          <input type="text" id="name" class="form-control col-md-7 col-xs-12" name="name" value="{{ $product->name or old('name') }}" placeholder="Name">
                           @if ($errors->first('name'))
                           <span class="error-input">{!! $errors->first('name') !!}</span>
                           @endif
                         </div>
                       </div>
 
-                      <!-- email -->
-                      <?php $str = ($errors->first('email')) ? 'bad' : null; ?>
+                      <!-- name_slug -->
+                      <?php $str = ($errors->first('name_slug')) ? 'bad' : null; ?>
                       <div class="form-group {{ $str }}">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Email <span class="required">*</span>
-                        </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Name slug</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="last-name" name="email" value="{{ $user->email or old('email') }}" class="form-control col-md-7 col-xs-12" placeholder="Email">
-                          @if ($errors->first('email'))
-                          <span class="error-input">{!! $errors->first('email') !!}</span>
+                          <input type="text" id="name_slug" name="name_slug" value="{{ $product->name_slug or old('name_slug') }}" class="form-control col-md-7 col-xs-12" placeholder="Name slug">
+                          @if ($errors->first('name_slug'))
+                          <span class="error-input">{!! $errors->first('name_slug') !!}</span>
                           @endif
                         </div>
                       </div>
 
-                      <!-- password -->
-                      <?php $str = ($errors->first('password')) ? 'bad' : null; ?>
-                      <div class="form-group {{ $str }}">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Password <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="password" placeholder="Password">
-                          @if ($errors->first('password'))
-                          <span class="error-input">{!! $errors->first('password') !!}</span>
-                          @endif
-                        </div>
-                      </div>
-
-                      <!-- sex -->
+                      <!-- price/price_promotion -->
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Sex</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Price/Price promotion </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="price" class="form-control col-md-7 col-xs-12 both-left" type="text" name="price" placeholder="Price" value="{{ $product->price or old('price') }}">
+                          <input id="price_promotion" class="form-control col-md-7 col-xs-12 both-right" type="text" name="price_promotion" value="{{ $product->price_promotion or old('price_promotion') }}" placeholder="Price promotion">
+                        </div>
+                      </div>
+
+                      <!-- weight, height -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Weight/Height </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="weight" class="form-control col-md-6 col-xs-6 both-left" type="text" name="weight" value="{{ $product->weight or old('weight') }}" placeholder="Weight">
+                          <input id="height" class="form-control col-md-6 col-xs-6 both-right" type="text" name="height" value="{{ $product->height or old('height') }}" placeholder="Weight">
+                        </div>
+                      </div>
+
+                      <!-- made_in, version_year -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Made in/Version year </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="made_in" class="form-control col-md-7 col-xs-12 both-left" type="text" name="made_in" value="{{ $product->made_in or old('made_in') }}" placeholder="Made in">
+                          <input id="version_year" class="form-control col-md-7 col-xs-12 both-right" type="text" name="version_year" value="{{ $product->version_year or old('version_year') }}" placeholder="Version year" >
+                        </div>
+                      </div>
+
+                      <!-- model -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Model/Color </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="model" class="form-control col-md-7 col-xs-12 both-left" type="text" name="model" value="{{ $product->model or old('model') }}" placeholder="Model">
+                          <input id="color" class="form-control col-md-7 col-xs-12 both-right" type="text" name="color" value="{{ $product->color or old('color') }}" placeholder="Color">
+                        </div>
+                      </div>
+
+                      <!-- tag -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tag </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="tag" class="form-control col-md-7 col-xs-12 tagsinput" type="text" name="tag" value="{{ $product->tag or old('tag') }}" placeholder="Tag">
+                        </div>
+                      </div>
+
+                      <!-- status -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default @if($user->sex == 1) active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="sex" value="1" data-parsley-multiple="gender"> &nbsp; Male &nbsp;
+                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default @if($product->status == 1) active @endif">
+                              <input type="radio" name="status" value="1" data-parsley-multiple="gender"> &nbsp; Stock &nbsp;
                             </label>
-                            <label class="btn btn-primary @if($user->sex == 0) active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="sex" value="0" data-parsley-multiple="gender"> Female
+                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default @if($product->status == 0) active @endif">
+                              <input type="radio" name="status" value="0" data-parsley-multiple="gender"> No stock
                             </label>
                           </div>
                         </div>
                       </div>
 
-                      <!-- address -->
+                      <!-- orderby -->
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Address </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Order </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="address" class="date-picker form-control col-md-7 col-xs-12" type="text" name="address" value="{{ $user->address or old('address') }}" placeholder="Address">
+                          <input id="orderby" class="form-control col-md-7 col-xs-12" type="text" name="orderby" value="{{ $product->orderby or old('orderby') }}" placeholder="Order">
                         </div>
                       </div>
 
-                      <!-- birthday -->
+                      <!-- is_feature -->
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Feature </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" type="text" name="birthday" value="{{ $user->birthday or old('birthday') }}" data-inputmask="'mask': '99-99-9999'" placeholder="Date Of Birth">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" class="" name="is_feature" value="1" @if($product->is_feature == 1 || old('is_feature') == 1) checked="" @endif> Check is feature
+                            </label>
+                          </div>
                         </div>
                       </div>
 
-                      <!-- phone -->
+                      <!-- is_new -->
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Phone </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">New </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="phone" class="date-picker form-control col-md-7 col-xs-12" type="text" name="phone" value="{{ $user->phone or old('phone') }}" maxlength="11" placeholder="Phone">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" class="" name="is_new" value="1" @if($product->is_new == 1 || old('is_new') == 1) checked="" @endif> Check is new
+                            </label>
+                          </div>
                         </div>
                       </div>
 
-                      <!-- fax -->
+                      <!-- description -->
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Fax </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="fax" class="date-picker form-control col-md-7 col-xs-12" type="text" name="fax" value="{{ $user->fax or old('fax') }}" placeholder="Fax">
+                          <textarea name="description" id="description" class="form-control col-md-7 col-xs-12 textarea" cols="30" rows="10">{{ $product->description or old('description') }}</textarea>
                         </div>
                       </div>
 
@@ -142,28 +181,22 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Avatar </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="img-content">
-                            <div class="radio">
-                              <label>
-                                <input type="radio" class="" checked name="keep_image" value="1"> Keep old image
-                              </label>
-                            </div>
-                            <!-- end radio -->
-                            @if ( !empty($user->avatar) )
-                            <img src="{{ asset('') }}public/uploads/users/{{ $user->avatar }}" alt="" >
+                            @if ( !empty($product->avatar) )
+                            <img src="{{ asset('') }}public/uploads/products/{{ $product->avatar }}" alt="" >
                             @endif
                           </div>
-                          <div>
-                            <div class="radio">
-                              <label>
-                                <input type="radio" class="" name="keep_image" value="0"> Update new image
-                              </label>
-                            </div>
-                            <!-- end radio -->
-                            <input id="avatar" class="date-picker form-control col-md-7 col-xs-12" type="file" name="avatar" value="{{ old('avatar') }}">
-                          </div>
+                          <input id="avatar" class="form-control col-md-7 col-xs-12" type="file" name="avatar">
                           @if ($errors->first('avatar'))
                           <span class="error-input">{!! $errors->first('avatar') !!}</span>
                           @endif
+                        </div>
+                      </div>
+
+                      <!-- images -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Images </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="images" class="form-control col-md-7 col-xs-12" type="file" name="images[]" multiple>
                         </div>
                       </div>
 
@@ -190,7 +223,15 @@
 @section('script')
   <script>
     $(document).ready(function() {
-      $("#birthday").inputmask();
+
+      $('.tagsinput').tagsInput({
+        width: 'auto'
+      });
+
+      $('#name_slug').focus(function(event) {
+        var value = to_slug($('#name').val());
+        $('#name_slug').attr('value', value);
+      });
     });
   </script>
 @endsection

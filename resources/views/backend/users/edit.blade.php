@@ -159,7 +159,7 @@
                               </label>
                             </div>
                             <!-- end radio -->
-                            <input id="avatar" class="date-picker form-control col-md-7 col-xs-12" type="file" name="avatar" value="{{ old('avatar') }}">
+                            <input id="avatar" class="form-control col-md-7 col-xs-12" type="file" name="avatar" value="{{ old('avatar') }}">
                           </div>
                           @if ($errors->first('avatar'))
                           <span class="error-input">{!! $errors->first('avatar') !!}</span>

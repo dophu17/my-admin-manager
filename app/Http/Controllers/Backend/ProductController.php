@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackendController;
 use App\Http\Models\ProductModel;
+use App\Http\Models\ImageModel;
 
 use Hash;
 use DB;
@@ -44,6 +45,7 @@ class ProductController extends BackendController
 	public function postAdd()
 	{
 		$clsProduct 			= new ProductModel();
+		$clsImage 				= new ImageModel();
 		$inputs 				= Input::all();
 		$avatar					= Input::file('avatar');
 
@@ -64,13 +66,28 @@ class ProductController extends BackendController
         }
         $datas['avatar'] = $imageName;
         $datas['created_at'] = date('Y-m-d H:i:s');
-        $status = $clsProduct->insert($datas);
+        $status = $clsProduct->insertGetID($datas);
 
         if ( $status ) {
         	// upload image
     		if ( $avatar ) {
     			$avatar->move(public_path() . '/uploads/products/', $imageName);
     		}
+
+	        // insert album and upload image
+	        if ( !empty($inputs['images']) ) {
+	        	foreach ( $inputs['images'] as $item ) {
+	        		$imageName = time() . '-' . $item->getClientOriginalName();
+		        	$dataImages = array(
+		        		'product_id' 	=> $status,
+		        		'name'			=> $imageName,
+		        	);
+			        $statusImage = $clsImage->insert($dataImages);
+			        if ( $statusImage ) {
+			        	$item->move(public_path() . '/uploads/products/', $imageName);
+			        }
+		        }
+	        }
 
         	Session::flash('success', trans('common.message_add_success'));
         } else {
@@ -84,9 +101,9 @@ class ProductController extends BackendController
 	public function getEdit($id)
 	{
 		$clsProduct 				= new ProductModel();
-		$data 					= array();
+		$data 						= array();
 
-		$data['titleContent'] 	= 'Edit product';
+		$data['titleContent'] 		= 'Edit product';
 		$data['product'] 			= $clsProduct->getByID($id);
 
 		if ( empty($data['product']) ) {

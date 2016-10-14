@@ -80,7 +80,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Price/Price promotion </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="price" class="form-control col-md-7 col-xs-12 both-left" type="text" name="price" placeholder="Price">
+                          <input id="price" class="form-control col-md-7 col-xs-12 both-left" type="text" name="price" placeholder="Price" value="{{ old('price') }}">
                           <input id="price_promotion" class="form-control col-md-7 col-xs-12 both-right" type="text" name="price_promotion" value="{{ old('price_promotion') }}" placeholder="Price promotion">
                         </div>
                       </div>
@@ -125,10 +125,10 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="gender" class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default @if(old('status') == 1) active @endif">
                               <input type="radio" name="status" value="1" data-parsley-multiple="gender"> &nbsp; Stock &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default @if(old('status') == 0) active @endif">
                               <input type="radio" name="status" value="0" data-parsley-multiple="gender"> No stock
                             </label>
                           </div>
@@ -180,10 +180,18 @@
                       <div class="form-group {{ $str }}">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Avatar </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="avatar" class="date-picker form-control col-md-7 col-xs-12" type="file" name="avatar" value="{{ old('avatar') }}">
+                          <input id="avatar" class="form-control col-md-7 col-xs-12" type="file" name="avatar">
                           @if ($errors->first('avatar'))
                           <span class="error-input">{!! $errors->first('avatar') !!}</span>
                           @endif
+                        </div>
+                      </div>
+
+                      <!-- images -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Images </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="images" class="form-control col-md-7 col-xs-12" type="file" name="images[]" multiple>
                         </div>
                       </div>
 
@@ -210,7 +218,6 @@
 @section('script')
   <script>
     $(document).ready(function() {
-      $("#birthday").inputmask();
 
       $('.tagsinput').tagsInput({
         width: 'auto'

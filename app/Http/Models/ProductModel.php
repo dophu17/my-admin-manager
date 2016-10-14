@@ -2,6 +2,8 @@
 
 use App\Http\Models\Model;
 
+use Auth;
+
 class ProductModel extends Model
 {
 	protected $table = 'products';
