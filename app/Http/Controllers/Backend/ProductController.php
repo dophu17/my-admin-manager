@@ -101,10 +101,12 @@ class ProductController extends BackendController
 	public function getEdit($id)
 	{
 		$clsProduct 				= new ProductModel();
+		$clsImage					= new ImageModel();
 		$data 						= array();
 
 		$data['titleContent'] 		= 'Edit product';
 		$data['product'] 			= $clsProduct->getByID($id);
+		$data['productImages']		= $clsImage->getImageProduct($id);
 
 		if ( empty($data['product']) ) {
 			return response()->view('errors.page_404', [], 404);
@@ -122,12 +124,6 @@ class ProductController extends BackendController
 
 		$product 				= $clsProduct->getByID($id);
 		$rules 					= $clsProduct->rules();
-		if ( $inputs['email'] == $product->email ) {
-			unset($rules['email']);
-		}
-		if ( empty($inputs['password']) ) {
-        	unset($rules['password']);
-        }
 		$messages 				= $clsProduct->messages();
 
 		$validator  = Validator::make($inputs, $rules, $messages);
@@ -136,29 +132,26 @@ class ProductController extends BackendController
         }
 
         $datas = $clsProduct->setValue($inputs);
-        if ( empty($inputs['password']) ) {
-        	unset($datas['password']);
-        }
 
         // image
         $imageName = NULL;
-        if ( $inputs['keep_image'] == 0 ) {
-        	if ( $avatar ) {
-        		$imageName = time() . '-' . $avatar->getClientOriginalName();
-        	} else {
-        		$imageName = null;
-        	}
-        	
-        } else {
-        	$imageName = $product->avatar;
-        }
+    	if ( $avatar ) {
+    		$imageName = time() . '-' . $avatar->getClientOriginalName();
+    	} else {
+    		if ( empty($inputs['avatar_old']) ) {
+    			$imageName = null;
+    		} else {
+	        	$imageName = $product->avatar;
+	        }
+    	}
+        
         $datas['avatar'] = $imageName;
         $datas['updated_at'] = date('Y-m-d H:i:s');
         $status = $clsProduct->update($id, $datas);
 
         if ( $status ) {
         	// upload image
-        	if ( $inputs['keep_image'] == 0 ) {
+        	if (  $avatar ) {
 	        	// delete old image
 	        	if ( File::exists(public_path() . '/uploads/products/' . $product->avatar) ) {
 	        		File::delete(public_path() . '/uploads/products/' . $product->avatar);
@@ -167,6 +160,13 @@ class ProductController extends BackendController
         		if ( $avatar ) {
         			$avatar->move(public_path() . '/uploads/products/',  $imageName);	
         		}
+	        } else {
+	        	if ( empty($inputs['avatar_old']) ) {
+	    			// delete old image
+		        	if ( File::exists(public_path() . '/uploads/products/' . $product->avatar) ) {
+		        		File::delete(public_path() . '/uploads/products/' . $product->avatar);
+		        	}
+	    		}
 	        }
 
         	Session::flash('success', trans('common.message_update_success'));

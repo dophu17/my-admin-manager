@@ -22,3 +22,32 @@
 .textarea {
 	resize: vertical;
 }
+
+.thumbnail {
+	height: auto;
+}
+
+.album-container {
+	position: relative;
+}
+
+.album-container:hover .album-tool {
+	display: block;
+}
+
+.album-tool {
+	position: absolute;
+	bottom: 27px;
+	right: 20px;
+	z-index: 2;
+	cursor: pointer;
+	display: none;
+}
+
+.album-tool-avatar {
+	bottom: 13px;
+}
+
+.icon-delete-album {
+	font-size: 21px;
+}
