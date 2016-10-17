@@ -103,15 +103,15 @@
                           <!-- album-container -->
                           <div class="album-container" id="category-icon-{{ $category->id }}">
                             <input type="hidden" name="icon_old" value="{{ $category->icon }}">
+                            @if ( !empty($category->icon) )
                             <div class="thumbnail album-img">
-                              @if ( !empty($category->icon) )
                               <img class="thumbnail-img" src="{{ asset('') }}public/uploads/categories/{{ $category->icon }}" alt="" >
-                              @endif
                               <div class="album-tool album-tool-avatar">
                                 <span class="float-left">{{ $category->icon }}</span>
                                 <i class="fa fa-trash-o icon-delete-avatar" category-id="{{ $category->id }}"></i>
                               </div>
                             </div>
+                            @endif
                           </div>
                           <!-- end album-container -->
                           <input id="icon" class="form-control col-md-7 col-xs-12" type="file" name="icon">

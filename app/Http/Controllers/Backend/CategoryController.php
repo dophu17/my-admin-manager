@@ -146,8 +146,8 @@ class CategoryController extends BackendController
 	        } else {
 	        	if ( empty($inputs['icon_old']) ) {
 	    			// delete old icon
-		        	if ( File::exists(public_path() . '/uploads/products/' . $category->icon) ) {
-		        		File::delete(public_path() . '/uploads/products/' . $category->icon);
+		        	if ( File::exists(public_path() . '/uploads/categories/' . $category->icon) ) {
+		        		File::delete(public_path() . '/uploads/categories/' . $category->icon);
 		        	}
 	    		}
 	        }

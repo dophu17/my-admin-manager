@@ -206,15 +206,15 @@
                               <!-- album-container -->
                               <div class="album-container" id="product-avatar-{{ $product->id }}">
                                 <input type="hidden" name="avatar_old" value="{{ $product->avatar }}">
+                                @if ( !empty($product->avatar) )
                                 <div class="thumbnail album-img">
-                                  @if ( !empty($product->avatar) )
                                   <img class="thumbnail-img" src="{{ asset('') }}public/uploads/products/{{ $product->avatar }}" alt="" >
-                                  @endif
                                   <div class="album-tool album-tool-avatar">
                                     <span class="float-left">{{ $product->avatar }}</span>
                                     <i class="fa fa-trash-o icon-delete-avatar" product-id="{{ $product->id }}"></i>
                                   </div>
                                 </div>
+                                @endif
                               </div>
                               <!-- end album-container -->
                               <input id="avatar" class="form-control col-md-7 col-xs-12" type="file" name="avatar">
