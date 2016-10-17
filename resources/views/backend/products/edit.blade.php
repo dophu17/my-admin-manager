@@ -204,15 +204,16 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Avatar </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <!-- album-container -->
-                              <div class="album-container" id="{{ $product->id }}">
+                              <div class="album-container" id="product-avatar-{{ $product->id }}">
                                 <input type="hidden" name="avatar_old" value="{{ $product->avatar }}">
                                 <div class="thumbnail album-img">
                                   @if ( !empty($product->avatar) )
                                   <img class="thumbnail-img" src="{{ asset('') }}public/uploads/products/{{ $product->avatar }}" alt="" >
                                   @endif
-                                </div>
-                                <div class="album-tool album-tool-avatar">
-                                  <i class="fa fa-trash-o icon-delete-album"></i>
+                                  <div class="album-tool album-tool-avatar">
+                                    <span class="float-left">{{ $product->avatar }}</span>
+                                    <i class="fa fa-trash-o icon-delete-avatar" product-id="{{ $product->id }}"></i>
+                                  </div>
                                 </div>
                               </div>
                               <!-- end album-container -->
@@ -233,13 +234,14 @@
                                 @if ( !empty($productImages) )
                                   @foreach ( $productImages as $item )
                                   <!-- col-md-6 -->
-                                  <div class="col-md-4 col-sm-6 album-container" id="{{ $item->id }}">
+                                  <div class="col-md-4 col-sm-6 album-container" id="product-album-{{ $item->id }}">
                                     <input type="hidden" name="images_old[]" value="{{ $item->name }}">
                                     <div class="thumbnail album-img">
                                       <img class="thumbnail-img" style="" src="{{ asset('') }}public/uploads/products/{{ $item->name }}" alt="image" />
-                                    </div>
-                                    <div class="album-tool">
-                                      <i class="fa fa-trash-o icon-delete-album"></i>
+                                      <div class="album-tool">
+                                        <span class="float-left">{{ $item->name }}</span>
+                                        <i class="fa fa-trash-o icon-delete-album" album-id="{{ $item->id }}"></i>
+                                      </div>
                                     </div>
                                   </div>
                                   <!-- end col-md-6 -->
@@ -291,10 +293,14 @@
         $('#name_slug').attr('value', value);
       });
 
-      // delete image album
-      $('.album-container').click(function(event) {
-        var id = $(this).attr('id');
-        $('#' + id).remove();
+      // delete image avatar/album
+      $('.icon-delete-avatar').click(function(event) {
+        var id = $(this).attr('product-id');
+        $('#product-avatar-' + id).remove();
+      });
+      $('.icon-delete-album').click(function(event) {
+        var id = $(this).attr('album-id');
+        $('#product-album-' + id).remove();
       });
     });
   </script>

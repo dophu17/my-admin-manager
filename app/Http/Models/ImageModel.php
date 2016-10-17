@@ -12,4 +12,9 @@ class ImageModel extends Model
 	{
 		return DB::table($this->table)->where('product_id', $productID)->orderBy($this->primary, 'asc')->get();
 	}
+
+	public function deleteImageProduct($productID)
+	{
+		return DB::table($this->table)->where('product_id', $productID)->delete();
+	}
 }

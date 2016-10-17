@@ -97,35 +97,27 @@
                       </div>
 
                       <!-- icon -->
-                      <?php $str = ($errors->first('icon')) ? 'bad' : null; ?>
-                      <div class="form-group {{ $str }}">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Avatar </label>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Icon </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="img-content">
-                            <div class="radio">
-                              <label>
-                                <input type="radio" class="" checked name="keep_image" value="1"> Keep old image
-                              </label>
+                          <!-- album-container -->
+                          <div class="album-container" id="category-icon-{{ $category->id }}">
+                            <input type="hidden" name="icon_old" value="{{ $category->icon }}">
+                            <div class="thumbnail album-img">
+                              @if ( !empty($category->icon) )
+                              <img class="thumbnail-img" src="{{ asset('') }}public/uploads/categories/{{ $category->icon }}" alt="" >
+                              @endif
+                              <div class="album-tool album-tool-avatar">
+                                <span class="float-left">{{ $category->icon }}</span>
+                                <i class="fa fa-trash-o icon-delete-avatar" category-id="{{ $category->id }}"></i>
+                              </div>
                             </div>
-                            <!-- end radio -->
-                            @if ( !empty($category->icon) )
-                            <img src="{{ asset('') }}public/uploads/categories/{{ $category->icon }}" alt="" >
-                            @endif
                           </div>
-                          <div>
-                            <div class="radio">
-                              <label>
-                                <input type="radio" class="" name="keep_image" value="0"> Update new image
-                              </label>
-                            </div>
-                            <!-- end radio -->
-                            <input id="icon" class="date-picker form-control col-md-7 col-xs-12" type="file" name="icon" value="{{ old('icon') }}">
-                          </div>
-                          @if ($errors->first('icon'))
-                          <span class="error-input">{!! $errors->first('icon') !!}</span>
-                          @endif
+                          <!-- end album-container -->
+                          <input id="icon" class="form-control col-md-7 col-xs-12" type="file" name="icon">
                         </div>
                       </div>
+                      <!--  end icon -->
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -153,6 +145,12 @@
       $('#name_slug').focus(function(event) {
         var value = to_slug($('#name').val());
         $('#name_slug').attr('value', value);
+      });
+
+      // delete image avatar/album
+      $('.icon-delete-avatar').click(function(event) {
+        var id = $(this).attr('category-id');
+        $('#category-icon-' + id).remove();
       });
     });
   </script>

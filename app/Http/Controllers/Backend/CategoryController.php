@@ -119,23 +119,22 @@ class CategoryController extends BackendController
 
         // image
         $imageName = NULL;
-        if ( $inputs['keep_image'] == 0 ) {
-        	if ( $icon ) {
-        		$imageName = time() . '-' . $icon->getClientOriginalName();
-        	} else {
-        		$imageName = null;
-        	}
-        	
-        } else {
-        	$imageName = $category->icon;
-        }
+    	if ( $icon ) {
+    		$imageName = time() . '-' . $icon->getClientOriginalName();
+    	} else {
+    		if ( empty($inputs['icon_old']) ) {
+    			$imageName = null;
+    		} else {
+	        	$imageName = $category->icon;
+	        }
+    	}
         $datas['icon'] = $imageName;
         $datas['updated_at'] = date('Y-m-d H:i:s');
         $status = $clsCategory->update($id, $datas);
 
         if ( $status ) {
         	// upload image
-        	if ( $inputs['keep_image'] == 0 ) {
+        	if ( $icon ) {
 	        	// delete old image
 	        	if ( File::exists(public_path() . '/uploads/categories/' . $category->icon) ) {
 	        		File::delete(public_path() . '/uploads/categories/' . $category->icon);
@@ -144,6 +143,13 @@ class CategoryController extends BackendController
         		if ( $icon ) {
         			$icon->move(public_path() . '/uploads/categories/',  $imageName);	
         		}
+	        } else {
+	        	if ( empty($inputs['icon_old']) ) {
+	    			// delete old icon
+		        	if ( File::exists(public_path() . '/uploads/products/' . $category->icon) ) {
+		        		File::delete(public_path() . '/uploads/products/' . $category->icon);
+		        	}
+	    		}
 	        }
 
         	Session::flash('success', trans('common.message_update_success'));

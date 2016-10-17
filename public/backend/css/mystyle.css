@@ -28,26 +28,30 @@
 }
 
 .album-container {
-	position: relative;
 }
 
-.album-container:hover .album-tool {
-	display: block;
+.album-img {
+	float: left;
 }
 
 .album-tool {
-	position: absolute;
-	bottom: 27px;
-	right: 20px;
-	z-index: 2;
 	cursor: pointer;
-	display: none;
+	float: right;
+	clear: both;
+	margin: 3px 0 0 0;
+	width: 100%;
 }
 
 .album-tool-avatar {
-	bottom: 13px;
+	width: 100%;
 }
 
-.icon-delete-album {
+.icon-delete-album,
+.icon-delete-avatar {
 	font-size: 21px;
+	float: right;
+}
+
+.float-left{
+	float: left;
 }

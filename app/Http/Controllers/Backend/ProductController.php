@@ -119,10 +119,15 @@ class ProductController extends BackendController
 	public function postEdit($id)
 	{
 		$clsProduct 			= new ProductModel();
+		$clsImage				= new ImageModel();
+
 		$inputs 				= Input::all();
 		$avatar					= Input::file('avatar');
+		$images					= Input::file('images');
+		$images_old				= Input::get('images_old');
 
 		$product 				= $clsProduct->getByID($id);
+		$productImagesAlbum		= $clsImage->getImageProduct($id);
 		$rules 					= $clsProduct->rules();
 		$messages 				= $clsProduct->messages();
 
@@ -133,7 +138,7 @@ class ProductController extends BackendController
 
         $datas = $clsProduct->setValue($inputs);
 
-        // image
+        // avatar
         $imageName = NULL;
     	if ( $avatar ) {
     		$imageName = time() . '-' . $avatar->getClientOriginalName();
@@ -144,30 +149,74 @@ class ProductController extends BackendController
 	        	$imageName = $product->avatar;
 	        }
     	}
+
         
         $datas['avatar'] = $imageName;
         $datas['updated_at'] = date('Y-m-d H:i:s');
         $status = $clsProduct->update($id, $datas);
 
         if ( $status ) {
-        	// upload image
+        	// upload avatar
         	if (  $avatar ) {
-	        	// delete old image
+	        	// delete old avatar
 	        	if ( File::exists(public_path() . '/uploads/products/' . $product->avatar) ) {
 	        		File::delete(public_path() . '/uploads/products/' . $product->avatar);
 	        	}
-	        	// update new image
+	        	// update new avatar
         		if ( $avatar ) {
         			$avatar->move(public_path() . '/uploads/products/',  $imageName);	
         		}
 	        } else {
 	        	if ( empty($inputs['avatar_old']) ) {
-	    			// delete old image
+	    			// delete old avatar
 		        	if ( File::exists(public_path() . '/uploads/products/' . $product->avatar) ) {
 		        		File::delete(public_path() . '/uploads/products/' . $product->avatar);
 		        	}
 	    		}
 	        }
+
+	        // upload images album
+	        // delete old images album
+        	$clsImage->deleteImageProduct($id);
+	        if ( !empty($productImagesAlbum) ) {
+	        	foreach ( $productImagesAlbum as $item ) {
+	        		if ( $images_old ) {
+	        			if ( !in_array($item->name, $images_old) ) {
+		        			if ( File::exists(public_path() . '/uploads/products/' . $item->name) ) {
+				        		File::delete(public_path() . '/uploads/products/' . $item->name);
+				        	}
+		        		}
+	        		}
+	        	}
+	        }
+
+	    	if ( $images_old ) {
+	    		foreach ( $images_old as $item ) {
+	        		$dataImagesAlbum 	= array(
+	    				'product_id' 	=> $id,
+	    				'name' 			=> $item,
+					);
+					$clsImage->insert($dataImagesAlbum);
+	        	}
+	    	}
+	        
+	        // update new images album
+	    	$imageProductName = null;
+	    	if ( $images ) {
+	    		foreach ( $images as $k => $v ) {
+		    		if ( $v ) {
+		    			$imageProductName = time() . '-' . $v->getClientOriginalName();
+		    			$dataImagesAlbum 	= array(
+		    				'product_id' 	=> $id,
+		    				'name' 			=> $imageProductName,
+						);
+						$statusImageAlbum = $clsImage->insert($dataImagesAlbum);
+		    			if ( $statusImageAlbum ) {
+		    				$v->move(public_path() . '/uploads/products/',  $imageProductName);
+		    			}
+		    		}
+		    	}
+	    	}
 
         	Session::flash('success', trans('common.message_update_success'));
         } else {
