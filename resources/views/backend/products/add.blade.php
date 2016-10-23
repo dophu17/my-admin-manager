@@ -216,8 +216,14 @@
 
 
 @section('script')
+  <script src="{{ asset('') }}public/backend/js/ckeditor/ckeditor.js"></script>
   <script>
     $(document).ready(function() {
+
+      CKEDITOR.replace('description', {
+        extraPlugins : 'iframe',
+        allowedContent: true, //'iframe[*]'
+      });
 
       $('.tagsinput').tagsInput({
         width: 'auto'
