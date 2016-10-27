@@ -99,7 +99,6 @@ class NewsController extends BackendController
 	public function postEdit($id)
 	{
 		$clsNews 				= new NewsModel();
-		$clsImage				= new ImageModel();
 
 		$inputs 				= Input::all();
 		$avatar					= Input::file('avatar');
@@ -165,9 +164,13 @@ class NewsController extends BackendController
 	{
 		$clsNews 			= new NewsModel();
 
+		$news 				= $clsNews->getByID($id);
 		$status 			= $clsNews->delete($id);
 
         if ( $status ) {
+        	if ( File::exists(public_path() . '/uploads/news/' . $news->avatar) ) {
+        		File::delete(public_path() . '/uploads/news/' . $news->avatar);
+        	}
         	Session::flash('success', trans('common.message_delete_success'));
         } else {
         	Session::flash('faild', trans('common.message_delete_faild'));

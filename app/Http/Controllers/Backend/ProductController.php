@@ -229,11 +229,24 @@ class ProductController extends BackendController
 
 	public function getDelete($id)
 	{
-		$clsProduct 		= new ProductModel();
+		$clsProduct 			= new ProductModel();
 
-		$status 			= $clsProduct->delete($id);
+		$product 				= $clsProduct->getByID($id);
+		$productImagesAlbum		= $clsImage->getImageProduct($id);
+		$status 				= $clsProduct->delete($id);
 
         if ( $status ) {
+        	// delete avatar
+        	if ( File::exists(public_path() . '/uploads/products/' . $product->avatar) ) {
+        		File::delete(public_path() . '/uploads/products/' . $product->avatar);
+        	}
+        	// delete album
+        	foreach ( $productImagesAlbum as $item) {
+        		$clsImage->delete($item->id);
+        		if ( File::exists(public_path() . '/uploads/products/' . $item->name) ) {
+	        		File::delete(public_path() . '/uploads/products/' . $item->name);
+	        	}
+        	}
         	Session::flash('success', trans('common.message_delete_success'));
         } else {
         	Session::flash('faild', trans('common.message_delete_faild'));

@@ -76,102 +76,19 @@
                         </div>
                       </div>
 
-                      <!-- price/price_promotion -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Price/Price promotion </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="price" class="form-control col-md-7 col-xs-12 both-left" type="text" name="price" placeholder="Price" value="{{ old('price') }}">
-                          <input id="price_promotion" class="form-control col-md-7 col-xs-12 both-right" type="text" name="price_promotion" value="{{ old('price_promotion') }}" placeholder="Price promotion">
-                        </div>
-                      </div>
-
-                      <!-- weight, height -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Weight/Height </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="weight" class="form-control col-md-6 col-xs-6 both-left" type="text" name="weight" value="{{ old('weight') }}" placeholder="Weight">
-                          <input id="height" class="form-control col-md-6 col-xs-6 both-right" type="text" name="height" value="{{ old('height') }}" placeholder="Weight">
-                        </div>
-                      </div>
-
-                      <!-- made_in, version_year -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Made in/Version year </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="made_in" class="form-control col-md-7 col-xs-12 both-left" type="text" name="made_in" value="{{ old('made_in') }}" placeholder="Made in">
-                          <input id="version_year" class="form-control col-md-7 col-xs-12 both-right" type="text" name="version_year" value="{{ old('version_year') }}" placeholder="Version year" >
-                        </div>
-                      </div>
-
-                      <!-- model -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Model/Color </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="model" class="form-control col-md-7 col-xs-12 both-left" type="text" name="model" value="{{ old('model') }}" placeholder="Model">
-                          <input id="color" class="form-control col-md-7 col-xs-12 both-right" type="text" name="color" value="{{ old('color') }}" placeholder="Color">
-                        </div>
-                      </div>
-
-                      <!-- tag -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tag </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tag" class="form-control col-md-7 col-xs-12 tagsinput" type="text" name="tag" value="{{ old('tag') }}" placeholder="Tag">
-                        </div>
-                      </div>
-
-                      <!-- status -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div id="gender" class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default @if(old('status') == 1) active @endif">
-                              <input type="radio" name="status" value="1" data-parsley-multiple="gender"> &nbsp; Stock &nbsp;
-                            </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default @if(old('status') == 0) active @endif">
-                              <input type="radio" name="status" value="0" data-parsley-multiple="gender"> No stock
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- orderby -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Order </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="orderby" class="form-control col-md-7 col-xs-12" type="text" name="orderby" value="{{ old('orderby') }}" placeholder="Order">
-                        </div>
-                      </div>
-
-                      <!-- is_feature -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Feature </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class="" name="is_feature" value="1" @if(old('is_feature') == 1) checked="" @endif> Check is feature
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- is_new -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">New </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class="" name="is_new" value="1" @if(old('is_new') == 1) checked="" @endif> Check is new
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
                       <!-- description -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Description </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <textarea name="description" id="description" class="form-control col-md-7 col-xs-12 textarea" cols="30" rows="10">{{ old('description') }}</textarea>
+                        </div>
+                      </div>
+
+                      <!-- content -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Content </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea name="content" id="content" class="form-control col-md-7 col-xs-12 textarea" cols="30" rows="10">{{ old('content') }}</textarea>
                         </div>
                       </div>
 
@@ -184,14 +101,6 @@
                           @if ($errors->first('avatar'))
                           <span class="error-input">{!! $errors->first('avatar') !!}</span>
                           @endif
-                        </div>
-                      </div>
-
-                      <!-- images -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Images </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="images" class="form-control col-md-7 col-xs-12" type="file" name="images[]" multiple>
                         </div>
                       </div>
 
@@ -221,6 +130,10 @@
     $(document).ready(function() {
 
       CKEDITOR.replace('description', {
+        extraPlugins : 'iframe',
+        allowedContent: true, //'iframe[*]'
+      });
+      CKEDITOR.replace('content', {
         extraPlugins : 'iframe',
         allowedContent: true, //'iframe[*]'
       });
